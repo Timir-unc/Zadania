@@ -1,9 +1,9 @@
-var op;
+let op;
 	function func() {	  	
-	    var result;
+	    let result;
 	    
-	    var num1 = Number(document.getElementById("num1").value);
-	    var num2 = Number(document.getElementById("num2").value);
+	    let num1 = Number(document.getElementById("num1").value);
+	    let num2 = Number(document.getElementById("num2").value);
 	    
 	    switch (op) {
 	      case '+':
@@ -21,4 +21,5 @@ var op;
 	    }
       
 	    document.getElementById("result").innerHTML = result;
+
 	  }
