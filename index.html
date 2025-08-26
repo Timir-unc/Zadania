@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<title>Document</title>
-</head>
-<body>
-	<input id="num1" /> Введите 1 число
-
-	
-	<div class='block'>
-	  <button class="butt" onclick="op='+'">+</button>
-	  <button class="butt" onclick="op='-'">-</button>
-	  <button class="butt" onclick="op='*'">*</button>
-	  <button class="butt" onclick="op='/'">/</button>
-	</div>
-
-	
-	<input id="num2" /> Введите 2 число
-	<br>
-
-
-	<p><button  onclick="func()">результат</button></p>
-
-	
-	<p id="result"></p>
-
-	<script src="script.js"></script>
-	
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="calculator"> 
+      <div id="display">0</div>
+      <div class="buttons">
+        <button class="button">7</button>
+        <button class="button">8</button>
+        <button class="button">9</button>
+        <button class="op">+</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <button class="op">-</button>
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="op">/</button>
+        <button class="button">0</button>
+        <button id="clear">AC</button>
+        <button class="op">=</button>
+        <button class="op">*</button>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>
