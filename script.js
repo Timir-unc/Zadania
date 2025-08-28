@@ -1,66 +1,50 @@
-const buttons = document.querySelectorAll('.button');
-const operators = document.querySelectorAll('.op');
-const clearButton = document.getElementById('clear');
-const display = document.getElementById('display');
-
-let currentExpression = '';
-let currentNumber = '';
-let result = "0";
-let lastOperator = '';
-
-buttons.forEach(button => {
-    button.addEventListener('click', function() {
-        const buttonValue = this.textContent;
-        currentNumber += buttonValue;
-        display.textContent = currentNumber;
-    });
-});
-
-operators.forEach(operator => {
-    operator.addEventListener('click', function() {
-        const operatorValue = this.textContent;
-        
-        if (operatorValue === '=') {
-          if (lastOperator !== '') {
-                result = calculate(result, parseFloat(currentNumber), lastOperator);
-            } else {
-                result = parseFloat(currentNumber);
-            }
-            display.textContent = result;
-            currentNumber = result.toString();
-            return;
+function generaterandomnumber() {
+    let number = '';
+    for (let i = 0; i < 4; i++) {
+        let digit = Math.floor(Math.random() * 10);
+        number += digit;
+    }
+    return number; 
+}
+function bullscows(guess, target) {
+    let bulls = 0;
+    let cows = 0;
+    let targetArray = target.split('');
+    let guessArray = guess.split('');
+    for (let i = 0; i < 4; i++) {
+        if (guessArray[i] === targetArray[i]) {
+            bulls++;
+            targetArray[i] = null;
+            guessArray[i] = null;
         }
-        
-        if (result !== 0) {
-            result = calculate(result, parseFloat(currentNumber), lastOperator);
-            display.textContent = result;
-        } else {
-            result = parseFloat(currentNumber);
+    }
+    for (let i = 0; i < 4; i++) {
+        if (guessArray[i] !== null && targetArray.includes(guessArray[i])) {
+            cows++;
+            targetArray[targetArray.indexOf(guessArray[i])] = null;
         }
-        
-        lastOperator = operatorValue;
-        currentNumber = '';
-    });
-});
-
-clearButton.addEventListener('click', function() {
-    display.textContent = '0';
-    currentNumber = '';
-    result = 0;
-    lastOperator = '';
-});
-
-function calculate(a, b, op) {
-    switch(op) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '/':
-            return a / b;
-        default:
-            return 0;
+    }
+    return { bulls, cows };
+}
+function playGame() {
+    const targetNumber = generaterandomnumber();
+    let tray = 0;
+    console.log("Компьютер загадал четырёхзначное число. Угадай его!");
+    while (true) {
+        const guess = prompt("Введите четырёхзначное число:");
+        tray++;
+        if (guess.length !== 4 || isNaN(guess)) {
+            console.log("Ошибка! Введите четырёхзначное число.");
+            continue;
+        }
+        const result = bullscows(guess, targetNumber);
+        console.log(`Попытка ${tray}: ${guess}`);
+        console.log(`${result.bulls} быков, ${result.cows} коров`);
+        if (result.bulls === 4) {
+            console.log(`Правильно! Вы угадали число за ${tray} попыток.`);
+            break;
+        }
     }
 }
+
+playGame();
